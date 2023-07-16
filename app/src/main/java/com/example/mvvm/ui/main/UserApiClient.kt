@@ -1,8 +1,9 @@
 package com.example.mvvm.ui.main
 
-import retrofit2.Call
+/*import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.Response
+import retrofit2.Response*/
+import com.example.mvvm.ui.main.Result
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -18,7 +19,7 @@ class UserApiClient {
         userApiService = retrofit.create(UserApiService::class.java)
     }
 
-    suspend fun getUser(
+    /*suspend fun getUser(
         userId: Int,
         callback: (Response<User>) -> Unit
     ) {
@@ -32,6 +33,15 @@ class UserApiClient {
                 // Handle failure
             }
         })
+    }*/
+
+    suspend fun getUser(id: Int): Result<User> {
+        return try {
+            val user = userApiService.getUser(id)
+            Result.success(user)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 
 }

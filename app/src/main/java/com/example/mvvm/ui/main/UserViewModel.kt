@@ -11,7 +11,7 @@ class UserViewModel : ViewModel() {
     private val _user = MutableLiveData<User?>()
     val user: LiveData<User?> = _user
 
-    suspend fun loadUser(id: Int) {
+    /*suspend fun loadUser(id: Int) {
         userApiClient.getUser(id) { response: Response<User> ->
             run {
                 if (response.isSuccessful) {
@@ -21,6 +21,18 @@ class UserViewModel : ViewModel() {
                     // Handle unsuccessful response or error
                 }
             }
+        }
+    }*/
+
+    suspend fun loadUser(id: Int) {
+        //I could use Result provided by the system
+        val result: Result<User> =  userApiClient.getUser(id)
+        result.onSuccess { user: User ->
+            // Handle successful response and user object
+            _user.value = user
+        }.onFailure { exception ->
+            // Handle failure or error
+            println("Error: ${exception.message}")
         }
     }
 
