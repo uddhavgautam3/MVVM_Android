@@ -50,9 +50,13 @@ class UserFragment : Fragment() {
         //observer(lifeCycleOwner, observer)
         userViewModel.user.observe(viewLifecycleOwner) { user ->
             userId.text = buildString {
-                append(user.id.toString())
+                if (user != null) {
+                    append(user.id.toString())
+                }
                 append(": ")
-                append(user.name)
+                if (user != null) {
+                    append(user.name)
+                }
             }
         }
 

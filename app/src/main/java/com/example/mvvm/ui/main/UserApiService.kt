@@ -1,9 +1,10 @@
 package com.example.mvvm.ui.main
 
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface UserApiService {
     @GET("users/{id}")
-    suspend fun getUserById(@Path("id") id: Int): User
+    suspend fun getUser(@Path("id") id: Int): Call<User>
 }

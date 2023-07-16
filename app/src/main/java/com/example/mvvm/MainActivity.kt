@@ -1,7 +1,7 @@
 package com.example.mvvm
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.mvvm.ui.main.UserFragment
 
 class MainActivity : AppCompatActivity() {
