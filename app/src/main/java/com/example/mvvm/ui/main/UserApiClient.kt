@@ -36,11 +36,16 @@ class UserApiClient {
     }*/
 
     suspend fun getUser(id: Int): Result<User> {
-        return try {
-            val user = userApiService.getUser(id)
-            Result.success(user)
+        try {
+            val user: User = userApiService.getUser(id)
+            //try to get and return the Result.success(user), which is Result<User>
+            //if not exception happens, wrap Nothing in Result for Exception so that
+            //we can return Result<Exception>
+            val resultUser: Result<User> = Result.success(user)
+            return resultUser
         } catch (e: Exception) {
-            Result.failure(e)
+            val resultNothing: Result<Nothing> = Result.failure(e)
+            return resultNothing
         }
     }
 

@@ -1,4 +1,6 @@
 package com.example.mvvm.ui.main
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -27,11 +29,12 @@ class UserViewModel : ViewModel() {
     suspend fun loadUser(id: Int) {
         //I could use Result provided by the system
         val result: Result<User> =  userApiClient.getUser(id)
-        result.onSuccess { user: User ->
+        //inside onSuccess, I can send any T type
+        val resultUser: Result<User> = result.onSuccess { user: User ->
             // Handle successful response and user object
-            _user.value = user
+            _user.value = user //this is what returns void (i.e., Unit)
         }.onFailure { exception ->
-            // Handle failure or error
+            // Handle failure on error
             println("Error: ${exception.message}")
         }
     }
