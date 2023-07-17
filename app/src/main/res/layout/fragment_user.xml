@@ -35,6 +35,8 @@
         android:id="@+id/userIdField"
         android:layout_width="64dp"
         android:layout_height="wrap_content"
+        android:inputType="number"
+        android:minHeight="48dp"
         android:text="@string/_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/loadButton"
