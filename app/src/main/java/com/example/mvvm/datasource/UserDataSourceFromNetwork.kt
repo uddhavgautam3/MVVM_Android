@@ -14,7 +14,7 @@ class UserDataSourceFromNetwork @Inject constructor() : UserDataSource {
         return userApiClient.getUser(id)
     }
 
-    override suspend fun getAllUsers(_userList: MutableLiveData<List<User?>?>) {
+    override fun getAllUsers(_userList: MutableLiveData<List<User?>?>) {
         userApiClient.getAllUsers(_userList)
     }
 

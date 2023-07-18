@@ -7,5 +7,5 @@ import com.example.mvvm.model.User
 
 interface UserDataSource {
     suspend fun getUser(id: Int): Result<User>
-    suspend fun getAllUsers(_userList: MutableLiveData<List<User?>?>)
+    fun getAllUsers(_userList: MutableLiveData<List<User?>?>)
 }

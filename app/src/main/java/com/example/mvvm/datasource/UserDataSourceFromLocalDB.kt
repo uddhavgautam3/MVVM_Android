@@ -12,7 +12,7 @@ class UserDataSourceFromLocalDB @Inject constructor() : UserDataSource {
         return Result.success(User(id, "From Local DB"))
     }
 
-    override suspend fun getAllUsers(_userList: MutableLiveData<List<User?>?>) {
+    override fun getAllUsers(_userList: MutableLiveData<List<User?>?>) {
         TODO()
     }
 

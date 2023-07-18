@@ -9,6 +9,6 @@ import javax.inject.Inject
 class FetchAllUserUseCase @Inject constructor(
     private val userRepository: UserRepository
 ) {
-    suspend fun getAllUsers(networkUtils: NetworkUtils, _userList: MutableLiveData<List<User?>?>) =
+    fun getAllUsers(networkUtils: NetworkUtils, _userList: MutableLiveData<List<User?>?>) =
         userRepository.getAllUsers(networkUtils, _userList)
 }

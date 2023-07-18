@@ -23,7 +23,7 @@ class UserRepository @Inject constructor(
         }
     }
 
-    suspend fun getAllUsers(networkUtils: NetworkUtils, _userList: MutableLiveData<List<User?>?>) {
+    fun getAllUsers(networkUtils: NetworkUtils, _userList: MutableLiveData<List<User?>?>) {
         if (networkUtils.isNetworkAvailable()) {
             userUserDataSourceNetwork.getAllUsers(_userList)
         } else {

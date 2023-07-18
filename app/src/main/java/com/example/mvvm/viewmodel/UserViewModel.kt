@@ -37,7 +37,7 @@ class UserViewModel @Inject constructor(
         }
     }
 
-    suspend fun getAllUsers() {
+    fun getAllUsers() {
         fetchAllUserUseCase.getAllUsers(networkUtils, _userList)
     }
 
