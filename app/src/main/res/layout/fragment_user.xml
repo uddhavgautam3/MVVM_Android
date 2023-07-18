@@ -5,31 +5,32 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.UserFragment">
+    tools:context=".ui.fragments.UserFragment">
 
     <TextView
         android:id="@+id/userIdTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="404dp"
+        android:layout_height="67dp"
+        android:background="@color/cardview_shadow_end_color"
         android:text="@string/userinfo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.081" />
+        app:layout_constraintVertical_bias="0.022" />
 
     <Button
-        android:id="@+id/loadButton"
+        android:id="@+id/getUserByIdButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/userbutton"
+        android:text="@string/getUserButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.264"
+        app:layout_constraintHorizontal_bias="0.311"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userIdTv"
-        app:layout_constraintVertical_bias="0.053" />
+        app:layout_constraintVertical_bias="0.056" />
 
     <EditText
         android:id="@+id/userIdField"
@@ -39,10 +40,24 @@
         android:minHeight="48dp"
         android:text="@string/_1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/loadButton"
+        android:autofillHints="User Id"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.168" />
+        app:layout_constraintEnd_toStartOf="@+id/getUserByIdButton"
+        app:layout_constraintVertical_bias="0.168"
+        tools:ignore="LabelFor" />
+
+    <Button
+        android:id="@+id/getAllUserButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/get_all_users"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.659"
+        app:layout_constraintStart_toEndOf="@+id/getUserByIdButton"
+        app:layout_constraintTop_toBottomOf="@+id/userIdTv"
+        app:layout_constraintVertical_bias="0.056" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

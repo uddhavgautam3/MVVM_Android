@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="userinfo">User Info</string>
-    <string name="userbutton">Button</string>
+    <string name="userinfo">Users Info</string>
+    <string name="getUserButton">Get User By ID</string>
     <string name="_1">1</string>
+    <string name="get_all_users">Get All Users</string>
 </resources>
