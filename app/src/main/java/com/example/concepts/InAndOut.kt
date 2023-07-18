@@ -30,11 +30,12 @@ fun main() {
     val catProducer: Producer<Cat> = CatProducer()
      */
     //I could do as above for these three lines below
-    val catProducer: Producer<Cat> = object : Producer<Cat> { // Cat is out T, it means Cat will get produced
-        override fun produce(): Cat {
-            return Cat()
+    val catProducer: Producer<Cat> =
+        object : Producer<Cat> { // Cat is out T, it means Cat will get produced
+            override fun produce(): Cat {
+                return Cat()
+            }
         }
-    }
     val cat: Cat = catProducer.produce() // Cat is produced as expected
 
     val animalProducer: Producer<Animal> = catProducer // Covariant assignment because of out
@@ -51,7 +52,7 @@ fun main() {
 
 
     val catConsumer: Consumer<Cat> = animalConsumer // Contravariant assignment*/
-    val catConsumer: Consumer<Cat> = object: Consumer<Animal> { //Contravariant assignment
+    val catConsumer: Consumer<Cat> = object : Consumer<Animal> { //Contravariant assignment
         override fun consume(item: Animal) {
             item.makeSound() //item although Animal type goes as a Cat
         }
