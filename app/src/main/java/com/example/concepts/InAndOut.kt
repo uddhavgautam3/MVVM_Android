@@ -21,41 +21,21 @@ interface Consumer<in T> {
 }
 
 fun main() {
-    /*
-    class CatProducer : Producer<Cat> {
+    // Using lambda expressions for interfaces
+    val catProducer: Producer<Cat> = object : Producer<Cat> {
         override fun produce(): Cat {
             return Cat()
         }
     }
-    val catProducer: Producer<Cat> = CatProducer()
-     */
-    //I could do as above for these three lines below
-    val catProducer: Producer<Cat> =
-        object : Producer<Cat> { // Cat is out T, it means Cat will get produced
-            override fun produce(): Cat {
-                return Cat()
-            }
-        }
-    val cat: Cat = catProducer.produce() // Cat is produced as expected
 
-    val animalProducer: Producer<Animal> = catProducer // Covariant assignment because of out
-    //because of out, polymorphism is possible, Power of possible in Container class is because of out. WOW!
-    val animal: Animal = animalProducer.produce() //equals to catProducer.produce()
-    animal.makeSound() //this, this is like calling from cat.makeSound()
-
-    /*val animalConsumer: Consumer<Animal> = object : Consumer<Animal> {
+    val cat: Cat = catProducer.produce()
+    val animalProducer: Producer<Animal> = catProducer // Covariant assignment
+    val animal: Animal = animalProducer.produce()
+    animal.makeSound()
+    val catConsumer: Consumer<Cat> = object : Consumer<Animal> {
         override fun consume(item: Animal) {
-            // Consume the animal
-            item.makeSound() // animal is consumed
+            item.makeSound()
         }
-    }
-
-
-    val catConsumer: Consumer<Cat> = animalConsumer // Contravariant assignment*/
-    val catConsumer: Consumer<Cat> = object : Consumer<Animal> { //Contravariant assignment
-        override fun consume(item: Animal) {
-            item.makeSound() //item although Animal type goes as a Cat
-        }
-    }
-    catConsumer.consume(cat) //Consumer<in T>
+    } // Contravariant assignment
+    catConsumer.consume(cat)
 }
