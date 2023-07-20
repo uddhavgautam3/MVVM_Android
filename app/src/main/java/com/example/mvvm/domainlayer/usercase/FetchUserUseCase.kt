@@ -4,8 +4,10 @@ import com.example.mvvm.datalayer.model.MyResult
 import com.example.mvvm.datalayer.model.UserEntity
 import com.example.mvvm.datalayer.repository.UserRepository
 import com.example.utils.NetworkUtils
+import dagger.Reusable
 import javax.inject.Inject
 
+@Reusable
 class FetchUserUseCase @Inject constructor(
     private val userRepository: UserRepository
 ) {
