@@ -12,8 +12,21 @@ class Cat : Animal() {
     }
 }
 
+//it's lambda expression function (or variable) should be called from it's instance  and return T
 interface Producer<out T> {
     fun produce(): T
+}
+
+/*
+This lambda expression has the function type Producer<T>.() -> T, which means it's a function
+that can be called on an instance of Producer<T> and returns a value of type T.
+ */
+fun <T> producerLambda(produceFunc: Producer<T>.() -> T): Producer<T> {
+    return object : Producer<T> {
+        override fun produce(): T {
+            return produceFunc()
+        }
+    }
 }
 
 interface Consumer<in T> {
@@ -27,6 +40,12 @@ fun main() {
             return Cat()
         }
     }
+
+    //With the help of producerLambda(), I can use lambda expression even for SAM generic interface
+    val catProducer2: Producer<Cat> = producerLambda { Cat() }
+    /*val catProducer2: Producer<Cat> = producerLambda(fun Producer<Cat>.(): Cat {
+        return Cat()
+    })*/
 
     val cat: Cat = catProducer.produce()
     val animalProducer: Producer<Animal> = catProducer // Covariant assignment
