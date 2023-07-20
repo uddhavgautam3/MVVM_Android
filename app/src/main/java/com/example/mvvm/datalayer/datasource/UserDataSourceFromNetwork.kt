@@ -1,6 +1,6 @@
 package com.example.mvvm.datalayer.datasource
 
-import com.example.mvvm.api.UserApiClient
+import com.example.mvvm.datalayer.api.UserApiClient
 import com.example.mvvm.datalayer.model.MyResult
 import com.example.mvvm.datalayer.model.UserEntity
 import javax.inject.Inject

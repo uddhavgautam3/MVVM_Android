@@ -1,53 +1,46 @@
-package com.example.mvvm.api
+package com.example.mvvm.datalayer.api
 
 import com.example.mvvm.datalayer.model.MyResult
 import com.example.mvvm.datalayer.model.UserEntity
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-class UserApiClient {
-    private val userApiService: UserApiService
+class UserApiClient @Inject constructor(
+    retrofit: Retrofit
+) {
+    private val userApiService: UserApiService =
+        retrofit.create(UserApiService::class.java)
 
-    init {
-        val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.0.19:3000/") // Replace with the actual base URL
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        userApiService = retrofit.create(UserApiService::class.java)
-    }
+    /*suspend fun getUser(id: Int): MyResult<UserEntity> {
+        return try {
+            val userEntity: UserEntity = userApiService.getUser(id)
+            MyResult.success(userEntity)
+        } catch (e: Exception) {
+            MyResult.Failure(e)
+        }
+    }*/
 
     suspend fun getUser(id: Int): MyResult<UserEntity> {
-        try {
-            val userEntity: UserEntity = userApiService.getUser(id)
-            //try to get and return the MyResult.success(userEntity), which is MyResult<UserEntity>
-            //if not exception happens, wrap Nothing in MyResult for Exception so that
-            //we can return MyResult<Exception>
-            val myResultUserEntity: MyResult<UserEntity> = MyResult.success(userEntity)
-            return myResultUserEntity
-        } catch (e: Exception) {
-            val myResultNothing: MyResult<Nothing> = MyResult.failure(e)
-            return myResultNothing
-        }
+        return runCatching {
+            userApiService.getUser(id)
+        }.fold(
+            onSuccess = { MyResult.success(it) },
+            /* If the throwable is an instance of Kotlin.Exception, we use it directly.
+            Otherwise, we create a new Exception instance with the original throwable as its cause.
+             */
+            onFailure = { throwable ->
+                val exception = throwable as? Exception ?: Exception(throwable)
+                MyResult.Failure(exception)
+            }
+        )
     }
 
     suspend fun getAllUsers(): MyResult<List<UserEntity>> {
-        try {
+        return try {
             val userEntityAll: List<UserEntity> = userApiService.getAllUsers()
-            val resultUserEntityAll: MyResult<List<UserEntity>> = MyResult.success(userEntityAll)
-            return resultUserEntityAll
+            MyResult.success(userEntityAll)
         } catch (e: Exception) {
-            val myResultNothing: MyResult<List<Nothing>> = MyResult.failure(e)
-            return myResultNothing
+            MyResult.failure(e)
         }
-
-        /*val jsonString = "[{\"id\": 1,\"name\": \"Uddhav Gautam\"},{\"id\": 2,\"name\": \"Roshani Dahal\"},{\"id\": 3,\"name\": \"Rose Gautam (The Future US President)\"}]"
-
-        // Use Gson to parse the JSON string into a list of UserEntity objects
-        val listType = object : TypeToken<List<UserEntity>>() {}.type
-        val userEntityAll: List<UserEntity> = Gson().fromJson(jsonString, listType)
-
-        val resultUserEntityAll: MyResult<List<UserEntity>> = MyResult.success(userEntityAll)
-        return resultUserEntityAll*/
     }
 }
