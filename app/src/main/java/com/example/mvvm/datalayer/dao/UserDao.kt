@@ -18,7 +18,7 @@ interface UserDao {
     fun getAllUsers(): List<UserEntity>
 
     @Query("SELECT * FROM users WHERE id = :userId")
-    fun getUser(userId: Int): UserEntity?
+    fun getUser(userId: Int): UserEntity
 
     @Query("DELETE FROM users")
     fun deleteAllUsers()

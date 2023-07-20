@@ -11,12 +11,21 @@ class UserDataSourceFromLocalDB @Inject constructor(
     private val userDao: UserDao
 ) : UserDataSource {
     override suspend fun getUser(id: Int): MyResult<UserEntity> {
-        return MyResult.success(UserEntity(id, "From Local DB"))
+        return try {
+            val user = userDao.getUser(id)
+            MyResult.success(user)
+        } catch (e: Exception) {
+            MyResult.Failure(e)
+        }
     }
 
     override suspend fun getAllUsers(): MyResult<List<UserEntity>> {
-        val userList: MyResult<List<UserEntity>> = MyResult.success(userDao.getAllUsers())
-        return userList
+        return try {
+            val userList = userDao.getAllUsers()
+            MyResult.success(userList)
+        } catch (e: Exception) {
+            MyResult.Failure(e)
+        }
     }
 
 }

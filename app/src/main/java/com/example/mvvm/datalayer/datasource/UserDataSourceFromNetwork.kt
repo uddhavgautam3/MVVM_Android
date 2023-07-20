@@ -7,8 +7,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class UserDataSourceFromNetwork @Inject constructor() : UserDataSource {
-    private val userApiClient = UserApiClient()
+class UserDataSourceFromNetwork @Inject constructor(
+    private val userApiClient: UserApiClient
+) : UserDataSource {
     override suspend fun getUser(id: Int): MyResult<UserEntity> {
         return userApiClient.getUser(id)
     }
