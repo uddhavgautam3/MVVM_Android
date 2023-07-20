@@ -15,20 +15,18 @@ class UserRepository @Inject constructor(
         id: Int,
         networkUtils: NetworkUtils
     ): MyResult<UserEntity> {
-        return if (networkUtils.isNetworkAvailable()) {
-            userDataSourceNetwork.getUser(id)
-        } else {
-            userDataSourceLocalDB.getUser(id)
+        return when {
+            networkUtils.isNetworkAvailable() -> userDataSourceNetwork.getUser(id)
+            else -> userDataSourceLocalDB.getUser(id)
         }
     }
 
     suspend fun getAllUsers(
         networkUtils: NetworkUtils
     ): MyResult<List<UserEntity>> {
-        return if (networkUtils.isNetworkAvailable()) {
-            userDataSourceNetwork.getAllUsers()
-        } else {
-            userDataSourceLocalDB.getAllUsers()
+        return when {
+            networkUtils.isNetworkAvailable() -> userDataSourceNetwork.getAllUsers()
+            else -> userDataSourceLocalDB.getAllUsers()
         }
     }
 }
