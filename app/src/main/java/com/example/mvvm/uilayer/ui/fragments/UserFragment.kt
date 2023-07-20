@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -19,8 +20,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/* Use Fragment(R.layout.fragment_user) constructor: Instead of overriding onCreateView to inflate the layout,
+use the Fragment(R.layout.fragment_user) constructor to directly set the layout resource ID.
+ */
 @AndroidEntryPoint
-class UserFragment : Fragment() {
+class UserFragment :  Fragment(R.layout.fragment_user) {
 
     private lateinit var userId: TextView
     private lateinit var userIdField: EditText
@@ -33,11 +37,6 @@ class UserFragment : Fragment() {
 
     //private lateinit var userViewModel: UserViewModel
     private val userViewModel by viewModels<UserViewModel>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,26 +52,39 @@ class UserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //observer(lifeCycleOwner, observer)
-        userViewModel.userEntity.observe(viewLifecycleOwner) { userEntity: UserEntity? ->
-            userId.text = buildString {
-                if (userEntity != null) {
-                    append(userEntity.id.toString())
-                }
-                append(": ")
-                if (userEntity != null) {
-                    append(userEntity.name)
-                }
+        setupViews(view)
+        observeViewModel()
+        setupButtons()
+    }
+
+    private fun setupViews(view: View) {
+        userId = view.findViewById(R.id.userIdTv)
+        userIdField = view.findViewById(R.id.userIdField)
+        getUserByIdButton = view.findViewById(R.id.getUserByIdButton)
+        getAllUserButton = view.findViewById(R.id.getAllUserButton)
+    }
+
+    private fun observeViewModel() {
+        userViewModel.userEntity.observe(viewLifecycleOwner) { userEntity ->
+            userEntity?.let {
+                userId.text = "${it.id}: ${it.name}"
             }
         }
 
-        userViewModel.userEntityList.observe(viewLifecycleOwner) { userEntityList: List<UserEntity?>? ->
+        userViewModel.userEntityList.observe(viewLifecycleOwner) { userEntityList ->
             userId.text = StringFormatter.formatUserList(userEntityList)
         }
+    }
 
+    private fun setupButtons() {
         getUserByIdButton.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
-                userViewModel.loadUserById(Integer.parseInt(userIdField.text.toString()))
+                val userIdValue = userIdField.text.toString().toIntOrNull()
+                if (userIdValue != null) {
+                    userViewModel.loadUserById(userIdValue)
+                } else {
+                    Toast.makeText(requireContext(), "Invalid User ID", Toast.LENGTH_SHORT).show()
+                }
                 withContext(Dispatchers.Main) {
                     //UI operations
                 }
@@ -88,4 +100,5 @@ class UserFragment : Fragment() {
             }
         }
     }
+
 }
