@@ -16,7 +16,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.mvvm.CustomTestRunner"
     }
 
     buildTypes {
@@ -84,6 +84,10 @@ dependencies {
     kaptAndroidTest("com.google.dagger:hilt-compiler:2.47")
     testImplementation("com.google.dagger:hilt-android-testing:2.47")
     kaptTest("com.google.dagger:hilt-compiler:2.47")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
 
 }
 

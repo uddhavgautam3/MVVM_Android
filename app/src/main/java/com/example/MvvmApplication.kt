@@ -36,6 +36,7 @@ import javax.inject.Inject
  */
 @HiltAndroidApp
 class MvvmApplication : Application(), CoroutineScope by CoroutineScope(Dispatchers.IO) {
+
     @Inject
     lateinit var userDatabase: UserDatabase
 
