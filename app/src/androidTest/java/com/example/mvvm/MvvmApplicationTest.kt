@@ -1,6 +1,5 @@
 package com.example.mvvm
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.example.mvvm.datalayer.db.UserDatabase
 import com.example.mvvm.datalayer.model.UserEntity
@@ -14,14 +13,12 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 import javax.inject.Inject
 
 /**
  * I could also make this to test UserDao. It is similar
  * CustomTestRunner should be used in build.gradle.kts file; otherwise hilt dependency injection won't work
  */
-@RunWith(AndroidJUnit4::class)
 @HiltAndroidTest
 @LargeTest
 class MvvmApplicationTest {

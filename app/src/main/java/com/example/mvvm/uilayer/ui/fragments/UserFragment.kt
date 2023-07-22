@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.mvvm.R
-import com.example.mvvm.datalayer.model.UserEntity
 import com.example.mvvm.uilayer.viewmodel.UserViewModel
 import com.example.utils.StringFormatter
 import dagger.hilt.android.AndroidEntryPoint
