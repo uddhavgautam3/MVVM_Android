@@ -19,7 +19,7 @@
         tools:targetApi="34">
 
         <activity
-            android:name=".uilayer.ui.activities.MainActivity"
+            android:name=".uilayer.ui.activities.UserActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
