@@ -1,7 +1,6 @@
 package com.example
 
 import android.app.Application
-import android.util.Log
 import com.example.mvvm.datalayer.db.UserDatabase
 import com.example.mvvm.datalayer.model.UserEntity
 import com.google.gson.Gson

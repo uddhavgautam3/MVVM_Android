@@ -87,7 +87,6 @@ dependencies {
     // Dagger Hilt
     implementation("com.google.dagger:hilt-android:2.47")
     kapt("com.google.dagger:hilt-android-compiler:2.47")
-    implementation("com.google.dagger:hilt-android:2.47")
     kapt("com.google.dagger:hilt-compiler:2.47")
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.47")
     kaptAndroidTest("com.google.dagger:hilt-compiler:2.47")
@@ -100,6 +99,7 @@ dependencies {
     implementation("com.google.dagger:dagger-android:2.47")
     implementation("com.google.dagger:dagger-android-support:2.47")
     annotationProcessor("com.google.dagger:dagger-android-processor:2.47")
+    kapt("com.google.dagger:dagger-compiler:2.47")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
@@ -124,7 +124,6 @@ dependencies {
     androidTestUtil("androidx.test:orchestrator:1.4.2")
     //for Activity and Fragment androidx.fragment.app.testing
     debugImplementation("androidx.fragment:fragment-testing:1.6.0")
-
 
 }
 

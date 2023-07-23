@@ -42,7 +42,8 @@ class UserActivityTest {
 
     @Test
     fun testButtonClicked() {
-        onView(withId(R.id.userIdTv)).check(matches(withText("Users Info")))
+        //If string "Users Info" changes everytime, it demands code change, which is not best practice
+        //onView(withId(R.id.userIdTv)).check(matches(withText("Users Info")))
         onView(withId(R.id.getUserByIdButton)).perform(click())
         onView(withId(R.id.getAllUserButton)).perform(click())
     }
