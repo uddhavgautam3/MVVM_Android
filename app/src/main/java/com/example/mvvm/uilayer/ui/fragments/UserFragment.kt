@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.mvvm.R
+import com.example.mvvm.databinding.FragmentUserBinding
 import com.example.mvvm.uilayer.viewmodel.UserViewModel
 import com.example.utils.StringFormatter
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,10 +23,9 @@ use the Fragment(R.layout.fragment_user) constructor to directly set the layout 
 @AndroidEntryPoint
 class UserFragment :  Fragment(R.layout.fragment_user) {
 
-    private lateinit var userId: TextView
-    private lateinit var userIdField: EditText
-    private lateinit var getUserByIdButton: Button
-    private lateinit var getAllUserButton: Button
+    // Using ViewBinding to access views
+    private var _binding: FragmentUserBinding? = null
+    private val binding get() = _binding!!
 
     companion object {
         fun newInstance() = UserFragment()
@@ -41,44 +38,32 @@ class UserFragment :  Fragment(R.layout.fragment_user) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val layout: View = inflater.inflate(R.layout.fragment_user, container, false)
-        userId = layout.findViewById<View>(R.id.userIdTv) as TextView
-        getUserByIdButton = layout.findViewById<View>(R.id.getUserByIdButton) as Button
-        getAllUserButton = layout.findViewById<View>(R.id.getAllUserButton) as Button
-        userIdField = layout.findViewById<View>(R.id.userIdField) as EditText
-        return layout
+        _binding = FragmentUserBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupViews(view)
         observeViewModel()
         setupButtons()
-    }
-
-    private fun setupViews(view: View) {
-        userId = view.findViewById(R.id.userIdTv)
-        userIdField = view.findViewById(R.id.userIdField)
-        getUserByIdButton = view.findViewById(R.id.getUserByIdButton)
-        getAllUserButton = view.findViewById(R.id.getAllUserButton)
     }
 
     private fun observeViewModel() {
         userViewModel.userEntity.observe(viewLifecycleOwner) { userEntity ->
             userEntity?.let {
-                userId.text = "${it.id}: ${it.name}"
+                binding.userIdTv.text = "${it.id}: ${it.name}"
             }
         }
 
         userViewModel.userEntityList.observe(viewLifecycleOwner) { userEntityList ->
-            userId.text = StringFormatter.formatUserList(userEntityList)
+            binding.userIdTv.text = StringFormatter.formatUserList(userEntityList)
         }
     }
 
     private fun setupButtons() {
-        getUserByIdButton.setOnClickListener {
+        binding.getUserByIdButton.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
-                val userIdValue = userIdField.text.toString().toIntOrNull()
+                val userIdValue = binding.userIdField.text.toString().toIntOrNull()
                 if (userIdValue != null) {
                     userViewModel.loadUserById(userIdValue)
                 } else {
@@ -90,7 +75,7 @@ class UserFragment :  Fragment(R.layout.fragment_user) {
             }
         }
 
-        getAllUserButton.setOnClickListener {
+        binding.getAllUserButton.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
                 userViewModel.loadAllUsers()
                 withContext(Dispatchers.Main) {

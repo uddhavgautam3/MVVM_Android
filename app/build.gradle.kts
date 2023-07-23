@@ -7,16 +7,20 @@ plugins {
 
 android {
     namespace = "com.example.mvvm"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.mvvm"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "com.example.mvvm.CustomTestRunner"
+    }
+
+    hilt {
+        enableTransformForLocalTests = true
     }
 
     buildTypes {
@@ -90,6 +94,13 @@ dependencies {
     testImplementation("com.google.dagger:hilt-android-testing:2.47")
     kaptTest("com.google.dagger:hilt-compiler:2.47")
 
+    //Dagger
+    implementation("com.google.dagger:dagger:2.47")
+    annotationProcessor("com.google.dagger:dagger-compiler:2.47")
+    implementation("com.google.dagger:dagger-android:2.47")
+    implementation("com.google.dagger:dagger-android-support:2.47")
+    annotationProcessor("com.google.dagger:dagger-android-processor:2.47")
+
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
@@ -111,9 +122,9 @@ dependencies {
     androidTestImplementation("androidx.test:runner:1.5.2")
     // To use android test orchestrator
     androidTestUtil("androidx.test:orchestrator:1.4.2")
-
     //for Activity and Fragment androidx.fragment.app.testing
     debugImplementation("androidx.fragment:fragment-testing:1.6.0")
+
 
 }
 
