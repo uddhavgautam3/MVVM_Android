@@ -5,9 +5,7 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
 import androidx.test.espresso.action.ViewActions.typeText
-import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.example.mvvm.R
 import com.example.mvvm.uilayer.ui.activities.UserActivity
@@ -20,14 +18,14 @@ import org.junit.Test
 @HiltAndroidTest
 class UserActivityTest {
 
+    // Enable Hilt for the test class using HiltAndroidRule
+    @get:Rule
+    var hiltRule = HiltAndroidRule(this)
+
     // Use ActivityScenarioRule to launch UserActivity for testing
     @get:Rule
     var activityRule: ActivityScenarioRule<UserActivity> =
         ActivityScenarioRule(UserActivity::class.java)
-
-    // Enable Hilt for the test class using HiltAndroidRule
-    @get:Rule
-    var hiltRule = HiltAndroidRule(this)
 
     @Before
     fun setup() {

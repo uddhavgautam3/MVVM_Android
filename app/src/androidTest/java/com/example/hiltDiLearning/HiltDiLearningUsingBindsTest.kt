@@ -12,7 +12,6 @@ import javax.inject.Inject
 
 @LargeTest
 @HiltAndroidTest
-@RunWith(AndroidJUnit4::class)
 class HiltDiLearningUsingBindsTest {
 
     @get:Rule

@@ -1,0 +1,14 @@
+Instrumentation tests have several benefits:
+
+User Interface Validation:
+    They allow you to interact with UI components and validate their behavior,
+    ensuring that the app's user interface is functioning correctly.
+End-to-End Testing:
+    They can cover entire user flows, helping verify the integration of different components and features.
+Regression Testing:
+    Instrumentation tests can be part of your automated testing suite,
+    providing a safety net to catch regressions as the codebase evolves.
+Robustness:
+    They test the app in a real device or emulator environment, making them more realistic and reliable.
+Documentation:
+    Tests serve as documentation for expected app behavior and usage.
