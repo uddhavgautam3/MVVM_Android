@@ -157,8 +157,10 @@ dependencies {
     //mockito
     testImplementation("org.mockito:mockito-core:5.3.1")
     androidTestImplementation("org.mockito:mockito-core:5.3.1")
-    testImplementation("org.mockito:mockito-inline:3.12.4")
-    androidTestImplementation("org.mockito:mockito-inline:3.12.4")
+    testImplementation("org.mockito:mockito-android:5.3.1")
+    androidTestImplementation("org.mockito:mockito-android:5.3.1")
+    /*testImplementation("org.mockito:mockito-inline:3.12.4")
+    androidTestImplementation("org.mockito:mockito-inline:3.12.4")*/
 
 
 }
