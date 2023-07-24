@@ -39,6 +39,23 @@ android {
         }
     }
 
+    sourceSets {
+        getByName("main") {
+            java.srcDirs("src/main/java")
+            res.srcDirs("src/main/res")
+        }
+
+        getByName("androidTest") {
+            java.srcDirs("src/androidTest/java")
+            res.srcDirs("src/androidTest/res")
+        }
+
+        getByName("test") {
+            java.srcDirs("src/test/java")
+            resources.srcDirs("src/test/resources")
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
