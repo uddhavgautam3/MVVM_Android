@@ -50,6 +50,12 @@ android {
             res.srcDirs("src/androidTest/res")
         }
 
+        getByName("debug") {
+            java.srcDirs("src/debug/java")
+            res.srcDirs("src/debug/res")
+        }
+
+
         getByName("test") {
             java.srcDirs("src/test/java")
             resources.srcDirs("src/test/resources")
@@ -75,9 +81,6 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     //retrofit
     implementation("com.squareup.retrofit2:retrofit:2.8.2")
@@ -104,25 +107,32 @@ dependencies {
     // Dagger Hilt
     implementation("com.google.dagger:hilt-android:2.47")
     kapt("com.google.dagger:hilt-android-compiler:2.47")
-    kapt("com.google.dagger:hilt-compiler:2.47")
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.47")
-    kaptAndroidTest("com.google.dagger:hilt-compiler:2.47")
+
     testImplementation("com.google.dagger:hilt-android-testing:2.47")
-    kaptTest("com.google.dagger:hilt-compiler:2.47")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.47")
+
+    kapt("com.google.dagger:hilt-compiler:2.47") //kotlin annotation processor for main sourceSet
+    kaptTest("com.google.dagger:hilt-compiler:2.47") //kotlin annotation processor for test
+    kaptAndroidTest("com.google.dagger:hilt-compiler:2.47") //kotlin annotation processor for androidTest
+
 
     //Dagger
     implementation("com.google.dagger:dagger:2.47")
-    annotationProcessor("com.google.dagger:dagger-compiler:2.47")
     implementation("com.google.dagger:dagger-android:2.47")
     implementation("com.google.dagger:dagger-android-support:2.47")
-    annotationProcessor("com.google.dagger:dagger-android-processor:2.47")
-    kapt("com.google.dagger:dagger-compiler:2.47")
 
+    kapt("com.google.dagger:dagger-compiler:2.47")
+    annotationProcessor("com.google.dagger:dagger-compiler:2.47") //for java-based projects
+    kapt("com.google.dagger:dagger-android-processor:2.47")
+    annotationProcessor("com.google.dagger:dagger-android-processor:2.47")
+
+    //JUnit
+    testImplementation("junit:junit:4.13.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
+    //Espresso
     androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
-
     // To use the androidx.test.core APIs
     androidTestImplementation("androidx.test:core:1.5.0")
     // Kotlin extensions for androidx.test.core
@@ -141,7 +151,6 @@ dependencies {
     androidTestUtil("androidx.test:orchestrator:1.4.2")
     //for Activity and Fragment androidx.fragment.app.testing
     debugImplementation("androidx.fragment:fragment-testing:1.6.0")
-
 }
 
 kapt {
