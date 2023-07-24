@@ -3,6 +3,7 @@ package com.example.mvvm.datalayer.api
 import com.example.mvvm.datalayer.model.MyResult
 import com.example.mvvm.datalayer.model.UserEntity
 import retrofit2.Retrofit
+import timber.log.Timber
 import javax.inject.Inject
 
 class UserApiClient @Inject constructor(
@@ -30,6 +31,7 @@ class UserApiClient @Inject constructor(
              */
             onFailure = { throwable ->
                 val exception = throwable as? Exception ?: Exception(throwable)
+                exception.message?.let { Timber.tag(TAG).d(it) }
                 MyResult.Failure(exception)
             }
         )
@@ -43,4 +45,9 @@ class UserApiClient @Inject constructor(
             MyResult.failure(e)
         }
     }
+
+    companion object {
+        const val TAG = "UserApiClient"
+    }
+
 }

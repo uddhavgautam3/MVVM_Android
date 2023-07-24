@@ -100,8 +100,6 @@ dependencies {
 
     //room
     implementation("androidx.room:room-runtime:2.5.2")
-    testImplementation("junit:junit:4.12")
-    testImplementation("junit:junit:4.12")
     kapt("androidx.room:room-compiler:2.5.2")
     implementation("androidx.room:room-common:2.5.2")
     implementation("androidx.room:room-ktx:2.5.2")
@@ -130,6 +128,8 @@ dependencies {
 
     //JUnit
     testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("junit:junit:4.13.2")
+
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
     androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1")
@@ -153,6 +153,14 @@ dependencies {
     androidTestUtil("androidx.test:orchestrator:1.4.2")
     //for Activity and Fragment androidx.fragment.app.testing
     debugImplementation("androidx.fragment:fragment-testing:1.6.0")
+
+    //mockito
+    testImplementation("org.mockito:mockito-core:5.3.1")
+    androidTestImplementation("org.mockito:mockito-core:5.3.1")
+    testImplementation("org.mockito:mockito-inline:3.12.4")
+    androidTestImplementation("org.mockito:mockito-inline:3.12.4")
+
+
 }
 
 kapt {
