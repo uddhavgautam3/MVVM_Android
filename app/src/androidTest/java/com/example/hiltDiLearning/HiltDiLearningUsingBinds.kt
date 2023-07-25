@@ -42,6 +42,7 @@ class SomeConsumerClass @Inject constructor(
 abstract class SomeModuleUsingBinds {
     @Binds
     abstract fun bindSomeInterface1(implementation1: SomeImplementation1): SomeInterface1
+
     @Binds
     abstract fun bindSomeInterface2(implementation2: SomeImplementation2): SomeInterface2
 }

@@ -38,10 +38,10 @@ class UserFragmentTest2 {
     fun testLaunchFragmentInHiltContainer() {
         val activityScenario: ActivityScenario<UserActivity> = launchActivity()
         activityScenario.onActivity {
-                val userFragment: Fragment = it.supportFragmentManager.fragmentFactory.instantiate(
-                    Preconditions.checkNotNull(UserFragment::class.java.classLoader),
-                    UserFragment::class.java.name
-                )
+            val userFragment: Fragment = it.supportFragmentManager.fragmentFactory.instantiate(
+                Preconditions.checkNotNull(UserFragment::class.java.classLoader),
+                UserFragment::class.java.name
+            )
 
             it.supportFragmentManager.beginTransaction()
                 .add(android.R.id.content, userFragment, "")

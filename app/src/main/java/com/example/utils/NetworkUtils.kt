@@ -22,7 +22,8 @@ class NetworkUtils @Inject constructor(val context: Context) {
 
     private fun registerNetworkCallback() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            connectivityManager?.registerDefaultNetworkCallback(object : ConnectivityManager.NetworkCallback() {
+            connectivityManager?.registerDefaultNetworkCallback(object :
+                ConnectivityManager.NetworkCallback() {
                 override fun onAvailable(network: Network) {
                     isNetworkAvailable = true
                 }

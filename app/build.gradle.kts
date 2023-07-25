@@ -19,10 +19,6 @@ android {
         testInstrumentationRunner = "com.example.mvvm.CustomTestRunner"
     }
 
-    hilt {
-        enableTransformForLocalTests = true
-    }
-
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
@@ -154,15 +150,12 @@ dependencies {
     //for Activity and Fragment androidx.fragment.app.testing
     debugImplementation("androidx.fragment:fragment-testing:1.6.0")
 
-    //mockito
-    testImplementation("org.mockito:mockito-core:5.3.1")
-    androidTestImplementation("org.mockito:mockito-core:5.3.1")
-    testImplementation("org.mockito:mockito-android:5.3.1")
-    androidTestImplementation("org.mockito:mockito-android:5.3.1")
-    /*testImplementation("org.mockito:mockito-inline:3.12.4")
-    androidTestImplementation("org.mockito:mockito-inline:3.12.4")*/
-
-
+    //mockk as mockito, powermock don't fully work with Kotlin
+    testImplementation("io.mockk:mockk:1.13.5")
+    testImplementation("io.mockk:mockk-android:1.13.5")
+    testImplementation("io.mockk:mockk-agent:1.13.5")
+    androidTestImplementation("io.mockk:mockk-android:1.13.5")
+    androidTestImplementation("io.mockk:mockk-agent:1.13.5")
 }
 
 kapt {

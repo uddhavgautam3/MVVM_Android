@@ -12,15 +12,6 @@ class UserApiClient @Inject constructor(
     private val userApiService: UserApiService =
         retrofit.create(UserApiService::class.java)
 
-    /*suspend fun getUser(id: Int): MyResult<UserEntity> {
-        return try {
-            val userEntity: UserEntity = userApiService.getUser(id)
-            MyResult.success(userEntity)
-        } catch (e: Exception) {
-            MyResult.Failure(e)
-        }
-    }*/
-
     suspend fun getUser(id: Int): MyResult<UserEntity> {
         return runCatching {
             userApiService.getUser(id)

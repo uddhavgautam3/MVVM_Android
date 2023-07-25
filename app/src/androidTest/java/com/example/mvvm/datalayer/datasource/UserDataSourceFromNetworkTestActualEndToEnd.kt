@@ -25,7 +25,7 @@ class UserDataSourceFromNetworkTestActualEndToEnd {
     @Before
     fun setup() {
         hiltRule.inject()
-      }
+    }
 
     @Test
     fun testUserDataSourceFromNetworkNotNull() {

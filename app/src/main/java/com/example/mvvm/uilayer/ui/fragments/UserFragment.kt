@@ -21,7 +21,7 @@ import kotlinx.coroutines.withContext
 use the Fragment(R.layout.fragment_user) constructor to directly set the layout resource ID.
  */
 @AndroidEntryPoint
-class UserFragment :  Fragment(R.layout.fragment_user) {
+class UserFragment : Fragment(R.layout.fragment_user) {
 
     // Using ViewBinding to access views
     private var _binding: FragmentUserBinding? = null
