@@ -1,8 +1,11 @@
+import org.gradle.internal.classloader.ClasspathUtil.getClasspath
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -96,6 +99,7 @@ dependencies {
 
     //room
     implementation("androidx.room:room-runtime:2.5.2")
+    implementation("androidx.core:core-ktx:1.10.1")
     kapt("androidx.room:room-compiler:2.5.2")
     implementation("androidx.room:room-common:2.5.2")
     implementation("androidx.room:room-ktx:2.5.2")
