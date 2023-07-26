@@ -26,6 +26,7 @@
           <stringArguments>
             <stringArg name="classpath">
               <args>
+                <arg>$MODULE_DIR$/../../../app/build/intermediates/compile_app_classes_jar/debug/classes.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/85f8464063c4f75f56aa18dcd6a0ccfa/transformed/hilt-android-testing-2.47-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/9be05aebc21ad4321a8546d5e59f41a5/transformed/junit-ktx-1.1.5-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/7323b3ed72cdc05275f86feef42ad924/transformed/junit-1.1.5-api.jar</arg>
