@@ -5,7 +5,6 @@ import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 import org.junit.Assert.assertEquals
-import org.junit.runner.RunWith
 import kotlin.properties.Delegates
 
 class UserEntityStepDefinitions {
