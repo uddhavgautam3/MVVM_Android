@@ -163,6 +163,9 @@ dependencies {
     testImplementation("io.cucumber:cucumber-java:7.13.0")
     testImplementation("io.cucumber:cucumber-junit:7.13.0")
     testImplementation("io.cucumber:cucumber-jvm:7.13.0")
+    androidTestImplementation("io.cucumber:cucumber-java:7.13.0")
+    androidTestImplementation("io.cucumber:cucumber-junit:7.13.0")
+    androidTestImplementation("io.cucumber:cucumber-jvm:7.13.0")
 
 }
 
