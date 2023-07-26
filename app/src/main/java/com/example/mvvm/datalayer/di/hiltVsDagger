@@ -1,0 +1,90 @@
+Both Hilt and Dagger are dependency injection frameworks for Android, with Hilt being built on top of Dagger to simplify the process of dependency injection. Let's take a look at how dependency injection is done using Hilt and Dagger.
+
+Dagger (without Hilt):
+Setup: First, you need to set up the Dagger dependency in your Android project by adding the Dagger dependencies to your build.gradle file:
+
+dependencies {
+    implementation 'com.google.dagger:dagger:2.x'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.x'
+}
+Creating Modules: In Dagger, you define modules to provide instances of classes that you want to inject. For example, you might have a module like this:
+
+@Module
+public class MyModule {
+    @Provides
+    public ApiService provideApiService() {
+        return new ApiService();
+    }
+}
+Creating Components: Components are interfaces in Dagger that define where dependencies can be injected. For example:
+
+@Component(modules = {MyModule.class})
+public interface MyComponent {
+    void inject(MyActivity activity);
+}
+Injecting Dependencies: In your Android classes, you annotate the fields you want to inject with @Inject:
+
+public class MyActivity extends AppCompatActivity {
+    @Inject
+    ApiService apiService;
+
+    // ...
+}
+Creating and Using the Component: Finally, you create an instance of the component and inject the dependencies:
+
+public class MyApp extends Application {
+    private MyComponent myComponent;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        myComponent = DaggerMyComponent.create();
+    }
+
+    public MyComponent getMyComponent() {
+        return myComponent;
+    }
+}
+
+public class MyActivity extends AppCompatActivity {
+    @Inject
+    ApiService apiService;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ((MyApp) getApplication()).getMyComponent().inject(this);
+
+        // Now you can use apiService
+    }
+}
+Hilt (with Dagger):
+Hilt simplifies the process further by reducing boilerplate code and managing the component creation for you. Here's how you do it with Hilt:
+
+Setup: Add the Hilt dependencies to your build.gradle file:
+gradle
+Copy code
+dependencies {
+    implementation 'com.google.dagger:hilt-android:2.x.x'
+    kapt 'com.google.dagger:hilt-android-compiler:2.x.x'
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+}
+Annotate your Application: In your custom Application class, annotate it with @HiltAndroidApp:
+
+@HiltAndroidApp
+public class MyApp extends Application {
+    // ...
+}
+Inject Dependencies: In your Android classes, use @Inject as before:
+
+public class MyActivity extends AppCompatActivity {
+    @Inject
+    ApiService apiService;
+
+    // ...
+}
+That's It: Hilt automatically handles the component creation and injection for you. You no longer need to define modules or components explicitly as Hilt generates them under the hood.
+With Hilt, the setup and configuration are simpler, and you can focus more on writing business logic without worrying too much about the DI setup. It also helps in managing complex scopes and simplifies testing with its built-in test components.
