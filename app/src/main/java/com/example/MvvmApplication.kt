@@ -1,6 +1,7 @@
 package com.example
 
 import android.app.Application
+import androidx.viewbinding.BuildConfig
 import com.example.mvvm.datalayer.db.UserDatabase
 import com.example.mvvm.datalayer.model.UserEntity
 import com.google.gson.Gson
@@ -42,6 +43,12 @@ class MvvmApplication : Application(), CoroutineScope by CoroutineScope(Dispatch
     override fun onCreate() {
         super.onCreate()
 
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        } else {
+            TODO()
+        }
+
         val jsonData = """
             [
                 {
@@ -66,7 +73,7 @@ class MvvmApplication : Application(), CoroutineScope by CoroutineScope(Dispatch
                 insertUsersToDatabase(userList)
             }
         } catch (e: Exception) {
-            Timber.tag(TAG).e("Error inserting users into the database: %s", e.message)
+            Timber.e("Error inserting users into the database: %s", e.message)
         }
     }
 
@@ -80,7 +87,4 @@ class MvvmApplication : Application(), CoroutineScope by CoroutineScope(Dispatch
         userDatabase.userDao().insertUsers(userList.toList())
     }
 
-    companion object {
-        private const val TAG = "MvvmApplication"
-    }
 }

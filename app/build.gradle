@@ -85,7 +85,7 @@ dependencies {
 
     //provides viewModels
     implementation("androidx.activity:activity-ktx:1.7.2")
-    implementation("androidx.fragment:fragment-ktx:1.6.0")
+    implementation("androidx.fragment:fragment-ktx:1.6.1")
 
     //lifecycle
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
@@ -147,7 +147,7 @@ dependencies {
     // To use android test orchestrator
     androidTestUtil("androidx.test:orchestrator:1.4.2")
     //for Activity and Fragment androidx.fragment.app.testing
-    debugImplementation("androidx.fragment:fragment-testing:1.6.0")
+    debugImplementation("androidx.fragment:fragment-testing:1.6.1")
 
     //mockk as mockito, powermock don't fully work with Kotlin
     testImplementation("io.mockk:mockk:1.13.5")
